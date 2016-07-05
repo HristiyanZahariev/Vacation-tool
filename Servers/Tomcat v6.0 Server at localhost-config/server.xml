@@ -131,7 +131,7 @@
                prefix="localhost_access_log." suffix=".txt" pattern="common" resolveHosts="false"/>
         -->
 
-      <Context docBase="Vacantion-Tool" path="/Vacantion-Tool" reloadable="true" source="org.eclipse.jst.jee.server:Vacantion-Tool"/></Host>
+      <Context docBase="Vacantion-Tool" path="/Vacantion-Tool" reloadable="true" source="org.eclipse.jst.jee.server:Vacantion-Tool"/><Context docBase="Vacantion-tooll" path="/Vacantion-tooll" reloadable="true" source="org.eclipse.jst.jee.server:Vacantion-tooll"/></Host>
     </Engine>
   </Service>
 </Server>
