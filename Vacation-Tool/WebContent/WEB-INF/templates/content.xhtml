@@ -1,0 +1,16 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core">
+ 
+    <ui:composition>
+	<div class="container">
+		<h:outputLabel value="Welcome Man"></h:outputLabel>
+        <h:form>
+        	<h4>Type something</h4>
+   			<h:inputText value = "#{controller.testValue}" />
+        	<h:commandButton class=".btn-primary" value = "Submit" action="#{controller.changeText}" /> 
+        </h:form>
+    </div>
+    </ui:composition>
+</html>

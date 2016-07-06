@@ -7,16 +7,5 @@
     xmlns:f="http://java.sun.com/jsf/core">
 
 <ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
-    <ui:define name="content">
-        <h:outputLabel value="Welcome Man"></h:outputLabel>
-        <h:form>
-        	<h4>Type something</h4>>
-        	<br>
-        		<h:inputText value = "#{controller.testValue}" />
-        	</br>
-        	
-        		<h:commandButton value = "Submit" action="#{controller.changeText}" /> 
-        </h:form>>
-    </ui:define>
 </ui:composition>
 </html>
