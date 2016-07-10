@@ -7,10 +7,15 @@
 	<div class="container">
 		<h:outputLabel value="Welcome Man"></h:outputLabel>
         <h:form>
-        	<h4>Type something</h4>
-   			<h:inputText value = "#{controller.testValue}" />
-        	<h:commandButton class=".btn-primary" value = "Submit" action="#{controller.changeText}" /> 
+        	<h:outputLabel for="username">Enter your username:</h:outputLabel>
+   			<h:inputText id="username_input" value = "#{userBean.username}" />
+   			<br></br>
+   			<h:outputLabel for="password">Enter you password:</h:outputLabel>
+   			<h:inputSecret id="password_input" value="#{userBean.password}" />
+   			<br></br>
+        	<h:commandButton class=".btn-primary" value = "Submit" action="#{userBean.changeText}" /> 
         </h:form>
     </div>
+    
     </ui:composition>
 </html>
