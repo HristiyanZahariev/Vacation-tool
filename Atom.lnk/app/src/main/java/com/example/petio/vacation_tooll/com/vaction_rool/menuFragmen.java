@@ -26,18 +26,20 @@ public class menuFragmen extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         frag = new RequestActivity();
-        fragmentTransaction = getFragmentManager().beginTransaction().add(R.id.container2,frag);
+        fragmentTransaction = getFragmentManager().beginTransaction().add(R.id.container,frag);
         fragmentTransaction.commit();
 
         View v = inflater.inflate(R.layout.menu_layout,container,false);
-        Button btReq = (Button)v.findViewById(R.id.bt_req);
-        Button btHis = (Button)v.findViewById(R.id.bt_history);
+
+
+        Button btReq = (Button)v.findViewById(R.id.button_req);
+        Button btHis = (Button)v.findViewById(R.id.button2_his);
 
         btReq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 frag = new RequestActivity();
-                fragmentTransaction = getFragmentManager().beginTransaction().add(R.id.container2,frag);
+                fragmentTransaction = getFragmentManager().beginTransaction().replace(R.id.container,frag);
                 fragmentTransaction.commit();
             }
         });
@@ -46,7 +48,7 @@ public class menuFragmen extends Fragment {
             @Override
             public void onClick(View v) {
                 frag = new HistoryActivity();
-                fragmentTransaction = getFragmentManager().beginTransaction().add(R.id.container2,frag);
+                fragmentTransaction = getFragmentManager().beginTransaction().replace(R.id.container,frag);
                 fragmentTransaction.commit();
 
             }

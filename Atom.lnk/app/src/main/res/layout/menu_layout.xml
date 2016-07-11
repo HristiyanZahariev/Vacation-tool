@@ -3,16 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal">
-
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="87dp"
         android:layout_height="wrap_content"
         android:text="Request"
-        android:id="@+id/bt_req" />
+        android:id="@+id/button_req" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="87dp"
         android:layout_height="wrap_content"
         android:text="History"
-        android:id="@+id/bt_history" />
+        android:id="@+id/button2_his" />
 </LinearLayout>
