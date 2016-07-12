@@ -17,7 +17,7 @@ public class AccountActivity extends AppCompatActivity {
 
         if (savedInstanceState == null){
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container,new menuFragmen()).commit();
+                    .add(R.id.menu_container,new menuFragmen()).commit();
         }
 
     }
