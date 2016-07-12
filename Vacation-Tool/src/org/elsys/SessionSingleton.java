@@ -1,5 +1,7 @@
 package org.elsys;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import javax.faces.bean.ManagedBean;
@@ -12,29 +14,31 @@ public class SessionSingleton {
 	
 	private static SessionSingleton instance = null;
 	
-	private String holidayDate;
+	private List<String> holidayDate = new ArrayList<String>();
 	
 	Random holidayPicker = new Random();
 	private Integer remainingHolidays = holidayPicker.nextInt(40 - 10 + 1) + 10;
 	
 	private String username;
 	
+	private SessionSingleton() {
+		
+	}
 	
-	public String getHolidayDate() {
+	public List<String> getHolidayDate() {
 		return holidayDate;
 	}
 
-	public void setHolidayDate(String holidayDate) {
-		this.holidayDate = holidayDate;
+	public void setHolidayDate(String date) {
+		if(!holidayDate.contains(date)) {
+			holidayDate.add(0, date);
+		}
 	}
-
+	
 	public Integer getRemainingHolidays() {
 		return remainingHolidays;
 	}
 
-	private SessionSingleton() {
-		
-	}
 	
 	public static SessionSingleton getInstance() {
 		if(instance == null) {
