@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<server auto-publish-setting="2" auto-publish-time="1" configuration-id="/Servers/Testing-config" deployDir="wtpwebapps" hostname="localhost" id="Testing" name="Testing" runtime-id="Apache Tomcat v6.0" secure="false" server-type="org.eclipse.jst.server.tomcat.60" server-type-id="org.eclipse.jst.server.tomcat.60" start-timeout="45" stop-timeout="15" testEnvironment="false" timestamp="12">
-  <list key="modules" value0="Vacantion-Tool::org.eclipse.jst.jee.server:Vacantion-Tool::jst.web::2.5"/>
-</server>
