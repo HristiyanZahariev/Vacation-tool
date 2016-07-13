@@ -1,9 +1,9 @@
 package org.elsys;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 
 @ManagedBean(name="userBean")
@@ -14,17 +14,25 @@ public class UserBean {
 	private String password;
 	private String name;
 	private String email;
+	private UserData userData;
 	
 	public void changeText() {
 		System.out.println("Submitted username: " + username);
 		System.out.println("Submitted password: " + password);
 		System.out.println("WTF: " + email);
-		UserData userData = SessionSingleton.getInstance().getUserData(username);
+		userData = SessionSingleton.getInstance().getUserData(username);
 		if(userData == null) {
 			userData = new UserData();
-			//TODO set username
-			//SessionSingleton.getInstance().addUserData(userData);
+			userData.setUsername(username);
+			SessionSingleton.getInstance().addUserData(userData);
 		}
+	}
+	
+	public void addHoliday(String start, String end) {
+		Holidays tmp = new Holidays();
+		tmp.addHoliday(start, end);
+		
+		userData.addHoliday(tmp);;
 	}
 
 	public String getUsername() {
@@ -59,9 +67,8 @@ public class UserBean {
 		this.password = pass;
 	}
 	
-	public List<Holidays> getManagedHolidays {
-		
-		
+	public List<Holidays> getManagedHolidays() {
+		return userData.getManagedHolidays();
 	}
 
 }

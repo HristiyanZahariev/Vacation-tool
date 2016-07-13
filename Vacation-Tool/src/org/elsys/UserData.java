@@ -1,5 +1,7 @@
 package org.elsys;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class UserData {
@@ -7,19 +9,20 @@ public class UserData {
 	
 	private String username;
 	
+	private List<Holidays> managedHolidays = new ArrayList<Holidays>();
 	
-	public String getHolidayDate() {
-		return holidayDate;
+
+	public List<Holidays> getManagedHolidays() {
+		return managedHolidays;
 	}
 
-	public void setHolidayDate(String holidayDate) {
-		this.holidayDate = holidayDate;
+	public void setManagedHolidays(List<Holidays> managedHolidays) {
+		this.managedHolidays = managedHolidays;
 	}
 
 	public Integer getRemainingHolidays() {
 		return remainingHolidays;
 	}
-	private String holidayDate;
 	
 	public String getUsername() {
 		return username;
@@ -28,4 +31,9 @@ public class UserData {
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
+	public void addHoliday(Holidays holiday) {
+		managedHolidays.add(holiday);
+	}
+
 }
