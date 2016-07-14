@@ -29,18 +29,18 @@
     			<h:panelGrid columns="2" cellpadding="5">
 
 			        <p:outputLabel for="id_start" value="Select start of your vacantion:" />
-			        <p:calendar id="id_start" value="#{calendarView.date4}">
+			        <p:calendar id="id_start" value="#{userBean.start}">
 			            <p:ajax event="dateSelect" listener="#{calendarView.onDateSelect}" update="msgs" />
 			        </p:calendar>
 		         </h:panelGrid>
 		         
 		         <h:panelGrid columns="2" cellpadding="5">
 			        <p:outputLabel for="id_end" value="Select start of your vacantion:" />
-			        <p:calendar id="id_end" value="#{calendarView.date4}">
+			        <p:calendar id="id_end" value="#{userBean.end}">
 			            <p:ajax event="dateSelect" listener="#{calendarView.onDateSelect}" update="msgs" />
 			        </p:calendar>
 		         </h:panelGrid>
-		    <p:commandButton value="Submit" update="msgs" actionListener="#{calendarView.click}" icon="ui-icon-check" />
+		    <p:commandButton value="Submit" update="msgs" action="#{userBean.addHoliday}" icon="ui-icon-check" />
 		 
 		    <p:dialog modal="true" resizable="false" header="Values" widgetVar="dlg" showEffect="fold">
 		        <p:panelGrid id="display" columns="2" columnClasses="label,value">

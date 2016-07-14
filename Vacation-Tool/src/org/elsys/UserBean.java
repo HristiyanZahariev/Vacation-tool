@@ -20,8 +20,26 @@ public class UserBean {
 	private String name;
 	private String email;
 	private UserData userData = null;
+	private String start;
+	private String end;
 	
-	public void changeText(ActionEvent event) {
+	public String getStart() {
+		return start;
+	}
+
+	public void setStart(String start) {
+		this.start = start;
+	}
+
+	public String getEnd() {
+		return end;
+	}
+
+	public void setEnd(String end) {
+		this.end = end;
+	}
+
+	public void loginUser() {
 		System.out.println("Submitted username: " + username);
 		System.out.println("Submitted password: " + password);
 		System.out.println("Submitted email: " + email);
@@ -36,6 +54,7 @@ public class UserBean {
 			FacesContext.getCurrentInstance().addMessage(null, message);
 		} else {
 			loggedIn = true;
+			System.out.println("User " + userData.getUsername() + " logged in");
 		}
 		
 		context.addCallbackParam("registered", loggedIn);
@@ -54,6 +73,7 @@ public class UserBean {
 			tmpData.setUsername(username);
 			SessionSingleton.getInstance().addUserData(tmpData);
 			registered = true;
+			System.out.println("registered user: " + username);
 		} else {
 			System.out.println("User with that name already exists");
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Register Error", "User with that name already exists.");
@@ -63,9 +83,10 @@ public class UserBean {
 		
 	}
 	
-	public void addHoliday(String start, String end) {
+	public void addHoliday() {
 		Holidays tmp = new Holidays(start, end);
 		
+		System.out.println(tmp.getDays());
 		userData.addHoliday(tmp);
 	}
 
