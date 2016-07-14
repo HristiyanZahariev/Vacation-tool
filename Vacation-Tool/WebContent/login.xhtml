@@ -11,46 +11,25 @@
 	<ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
 	<ui:define name="content">
 		<body>
-			<div class="container">
-				<div class="row main">
-					<div class="panel-heading">
-		               <div class="panel-title text-center">
-		               		<h1 class="title">Do you need a vacantion?</h1>
-		               		<hr />
-		               	</div>
-		            </div> 
-					<div class="main-login main-center">
-						<h:form class="form-horizontal">
-							<div class="form-group">
-								<label for="username" class="cols-sm-2 control-label">Username</label>
-								<div class="cols-sm-10">
-									<div class="input-group">
-										<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-										<h:inputText class="form-control" name="username" id="username" value = "#{userBean.username}" pt:placeholder="Enter your Username"/>
-									</div>
-								</div>
-							</div>
-	
-							<div class="form-group">
-								<label for="password" class="cols-sm-2 control-label">Password</label>
-								<div class="cols-sm-10">
-									<div class="input-group">
-										<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-										<p:password  value="#{userBean.password}" id="feedback" feedback="true"/>
-									</div>
-								</div>
-							</div>
-	
-							<div class="form-group ">
-								<h:commandButton class="btn btn-primary btn-lg btn-block login-button" value = "Login" action="index.xhtml" /> 
-							</div>
-							<div class="login-register">
-					            <a href="register.xhtml">Register</a>
-					         </div>
-						</h:form>
-					</div>
-				</div>
-			</div>
+			<h1 class="title">Do you need a vacantion?</h1>
+			<hr />
+			<h:form>
+			    <p:panel id="panel" header="Login">
+			        <p:focus context="panel"/>
+			 
+			        <h:panelGrid columns="3">
+			            <p:outputLabel for="username" value="Enter your username" />
+			            <p:inputText id="username" value="#{userBean.username}" required="true" label="Firstname">
+			                <f:validateLength minimum="2" />
+			            </p:inputText>
+			 		 <p:separator />
+			            <p:outputLabel value="Enter you password" />
+			             <p:password id="nonFeedback" value="#{userBean.password}" />
+			        </h:panelGrid>
+			 
+			        <p:commandButton id="submitButton" value="Save" update="@parent" action="index.xhtml" />
+			    </p:panel>
+			</h:form>
 		</body>
 	</ui:define>
 	</ui:composition>
