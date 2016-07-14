@@ -41,6 +41,10 @@ public class UserBean {
 		context.addCallbackParam("registered", loggedIn);
 	}
 	
+    public void info() {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "PrimeFaces Rocks."));
+    }
+	
 	public void registerUser(ActionEvent event) {
 		boolean registered = false;
 		RequestContext context = RequestContext.getCurrentInstance();

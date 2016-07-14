@@ -15,8 +15,10 @@
 			<p:calendar id="inline" value="#{calendarView.date1}" mode="inline" />
 		
 			<h:panelGrid columns="1" cellpadding="5">
-    			<p:commandButton value="Holidays left" type="button" onclick="PF('dlg3').show();" /> 
+    			<p:commandButton value="Holidays left" type="button" onclick="wtf #{userData.getRemainingHolidays}" /> 
 			</h:panelGrid>
+			
+			<h1>wtf "#{userData.getRemainingHolidays}"</h1>
 
 			<p:dialog header="Effects" widgetVar="dlg3" showEffect="explode" hideEffect="bounce" height="100">
     			<h:outputText value="You have #{holidays.remainingHolidays} days of vacation left" />
