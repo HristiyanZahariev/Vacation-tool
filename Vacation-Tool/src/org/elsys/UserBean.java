@@ -1,9 +1,15 @@
 package org.elsys;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+
 import java.util.List;
 
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
+
+import org.primefaces.context.RequestContext;
 
 @ManagedBean(name="userBean")
 @SessionScoped
@@ -20,23 +26,36 @@ public class UserBean {
 		System.out.println("Submitted password: " + password);
 		System.out.println("Submitted email: " + email);
 		
+		boolean loggedIn = false;
+		RequestContext context = RequestContext.getCurrentInstance();
+		
 		userData = SessionSingleton.getInstance().getUserData(username);
 		if(userData == null) {
-			System.out.println("No user with that name. Please register.");
+			System.out.println("No user with that name. Please register.");	
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error", "No user with that name is registered.");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+		} else {
+			loggedIn = true;
 		}
 		
-		
+		context.addCallbackParam("registered", loggedIn);
 	}
 	
-	public void registerUser() {
+	public void registerUser(ActionEvent event) {
+		boolean registered = false;
+		RequestContext context = RequestContext.getCurrentInstance();
+		
 		if(SessionSingleton.getInstance().getUserData(username) == null) {
 			UserData tmpData = new UserData();
 			tmpData.setUsername(username);
-			SessionSingleton.getInstance().addUserData(tmpData);			
+			SessionSingleton.getInstance().addUserData(tmpData);
+			registered = true;
 		} else {
 			System.out.println("User with that name already exists");
-			
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Register Error", "User with that name already exists.");
+			FacesContext.getCurrentInstance().addMessage(null, message);
 		}
+		context.addCallbackParam("registered", registered);
 		
 	}
 	
