@@ -21,7 +21,7 @@ public class UserBean {
 	private String email;
 	private UserData userData = null;
 	
-	public void changeText() {
+	public void changeText(ActionEvent event) {
 		System.out.println("Submitted username: " + username);
 		System.out.println("Submitted password: " + password);
 		System.out.println("Submitted email: " + email);
