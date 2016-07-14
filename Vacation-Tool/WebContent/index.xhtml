@@ -5,12 +5,24 @@
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui">
 
 	<ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
 	<ui:define name="content">
 		<body>
-			<h2>You have #{holidays.remainingHolidays} days of vacation left</h2>
+			<h1>Today's date:</h1>
+			<p:calendar id="inline" value="#{calendarView.date1}" mode="inline" />
+		
+			<h:panelGrid columns="1" cellpadding="5">
+    			<p:commandButton value="Holidays left" type="button" onclick="PF('dlg3').show();" /> 
+			</h:panelGrid>
+
+			<p:dialog header="Effects" widgetVar="dlg3" showEffect="explode" hideEffect="bounce" height="100">
+    			<h:outputText value="You have #{holidays.remainingHolidays} days of vacation left" />
+			</p:dialog>
+			<h2>Select a date:</h2>
+				
 		</body>
 	</ui:define>
 	</ui:composition>
