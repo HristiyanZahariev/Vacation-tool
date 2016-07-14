@@ -14,12 +14,13 @@ public class UserBean {
 	private String password;
 	private String name;
 	private String email;
-	private UserData userData;
+	private UserData userData = null;
 	
 	public void changeText() {
 		System.out.println("Submitted username: " + username);
 		System.out.println("Submitted password: " + password);
-		System.out.println("WTF: " + email);
+		System.out.println("Submitted email: " + email);
+		
 		userData = SessionSingleton.getInstance().getUserData(username);
 		if(userData == null) {
 			userData = new UserData();
@@ -28,11 +29,24 @@ public class UserBean {
 		}
 	}
 	
+	public void registerUser() {
+		if(SessionSingleton.getInstance().getUserData(username) == null) {
+			userData = new UserData();
+			userData.setUsername(username);
+			SessionSingleton.getInstance().addUserData(userData);			
+		} else {
+			System.out.println("User with that name already exists");
+			
+		}
+		
+	}
+	
 	public void addHoliday(String start, String end) {
 		Holidays tmp = new Holidays();
 		tmp.addHoliday(start, end);
 		
-		userData.addHoliday(tmp);;
+		UserData data = SessionSingleton.getInstance().getUserData(username);
+		data.addHoliday(tmp);
 	}
 
 	public String getUsername() {
@@ -70,5 +84,14 @@ public class UserBean {
 	public List<Holidays> getManagedHolidays() {
 		return userData.getManagedHolidays();
 	}
+	
+	public int getRemainingHolidays() {
+		return userData.getRemainingHolidays();
+	}
+	
+	public String getUserDataUsername() {
+		return userData.getUsername();
+	}
+	
 
 }
