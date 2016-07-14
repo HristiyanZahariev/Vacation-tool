@@ -5,7 +5,8 @@
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui" >
 
 	<ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
 	<ui:define name="content">
@@ -35,7 +36,7 @@
 								<div class="cols-sm-10">
 									<div class="input-group">
 										<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-										<h:inputSecret class="form-control" name="password" id="password" value="#{userBean.password}" pt:placeholder="Enter your Password"/>
+										<p:password  value="#{userBean.password}" id="feedback" feedback="true"/>
 									</div>
 								</div>
 							</div>
