@@ -10,17 +10,17 @@ public class Holidays {
 	private String holidayEnd;
 	
 	
+	public Holidays(String holidayStart, String holidayEnd) {
+		this.holidayEnd = holidayEnd;
+		this.holidayStart = holidayStart;
+	}
+	
 	public String getHolidayStart() {
 		return holidayStart;
 	}
 
 	public String getHolidayEnd() {
 		return holidayEnd;
-	}
-
-	public void addHoliday(String start, String end) {
-		holidayStart = start;
-		holidayEnd = end;
 	}
 	
 	public int getDays() {

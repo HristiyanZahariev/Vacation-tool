@@ -1,12 +1,8 @@
 package org.elsys;
 
-import java.util.ArrayList;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import org.primefaces.context.RequestContext;
 import java.util.List;
 
-import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 @ManagedBean(name="userBean")
@@ -26,17 +22,17 @@ public class UserBean {
 		
 		userData = SessionSingleton.getInstance().getUserData(username);
 		if(userData == null) {
-			userData = new UserData();
-			userData.setUsername(username);
-			SessionSingleton.getInstance().addUserData(userData);
+			System.out.println("No user with that name. Please register.");
 		}
+		
+		
 	}
 	
 	public void registerUser() {
 		if(SessionSingleton.getInstance().getUserData(username) == null) {
-			userData = new UserData();
-			userData.setUsername(username);
-			SessionSingleton.getInstance().addUserData(userData);			
+			UserData tmpData = new UserData();
+			tmpData.setUsername(username);
+			SessionSingleton.getInstance().addUserData(tmpData);			
 		} else {
 			System.out.println("User with that name already exists");
 			
@@ -45,13 +41,23 @@ public class UserBean {
 	}
 	
 	public void addHoliday(String start, String end) {
-		Holidays tmp = new Holidays();
-		tmp.addHoliday(start, end);
+		Holidays tmp = new Holidays(start, end);
 		
-		UserData data = SessionSingleton.getInstance().getUserData(username);
-		data.addHoliday(tmp);
+		userData.addHoliday(tmp);
 	}
 
+	public List<Holidays> getManagedHolidays() {
+		return userData.getManagedHolidays();
+	}
+	
+	public int getRemainingHolidays() {
+		return userData.getRemainingHolidays();
+	}
+	
+	public String getUserDataUsername() {
+		return userData.getUsername();
+	}
+	
 	public String getUsername() {
 		return username;
 	}
@@ -84,17 +90,6 @@ public class UserBean {
 		this.password = pass;
 	}
 	
-	public List<Holidays> getManagedHolidays() {
-		return userData.getManagedHolidays();
-	}
-	
-	public int getRemainingHolidays() {
-		return userData.getRemainingHolidays();
-	}
-	
-	public String getUserDataUsername() {
-		return userData.getUsername();
-	}
 	
 
 }
