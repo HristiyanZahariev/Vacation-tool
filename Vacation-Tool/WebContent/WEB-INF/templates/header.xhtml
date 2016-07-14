@@ -6,8 +6,13 @@
 	xmlns:p="http://primefaces.org/ui" >
  
     <ui:composition>
-		<div class="ui-g-12">
-        	Bar
-        </div>
+		<p:tabMenu activeIndex="#{param.i}">
+		    <p:menuitem value="Login" outcome="/login.xhtml" icon="ui-icon-star">
+		        <f:param name="i" value="0" />
+		    </p:menuitem>
+		    <p:menuitem value="Register" outcome="/register.xhtml" icon="ui-icon-document">
+		        <f:param name="i" value="2" />
+		    </p:menuitem>
+		</p:tabMenu>
     </ui:composition>
 </html>

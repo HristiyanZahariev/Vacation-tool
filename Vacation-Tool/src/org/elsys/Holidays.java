@@ -11,6 +11,9 @@ public class Holidays {
 	private Date holidayStart;
 	private Date holidayEnd;
 	
+	public String getDuration() {
+		return holidayStart.toString() + " " + holidayEnd.toString();
+	}
 	
 	public Holidays(Date holidayStart, Date holidayEnd) {
 		this.holidayEnd = holidayEnd;
@@ -29,7 +32,7 @@ public class Holidays {
 		DateTime startDate = new DateTime(holidayStart);
 		DateTime endDate = new DateTime(holidayEnd);
 		
-		return Days.daysBetween(startDate, endDate).getDays();
+		return Days.daysBetween(startDate, endDate).getDays() + 1;
 	}
 	
 	

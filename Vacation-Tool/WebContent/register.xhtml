@@ -39,7 +39,7 @@
 		    	</h:panelGrid>
 		
 				<div class="form-group ">
-					<p:commandButton value="Register" update="matchGrid" actionListener="#{userBean.registerUser}"
+					<p:commandButton value="Register" update="matchGrid" actionListener="#{userBean.renderLogin}"
 		                          oncomplete="handleLoginRequest(xhr, status, args)"/>
 				</div>
 			</h:form>

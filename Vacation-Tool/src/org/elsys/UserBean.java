@@ -3,12 +3,14 @@ package org.elsys;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
@@ -30,6 +32,12 @@ public class UserBean {
 	public Date getStart() {
 		return start;
 	}
+	
+	public void logout() throws IOException {
+	    ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+	    ec.invalidateSession();
+	    ec.redirect(ec.getRequestContextPath() + "/login.xhtml");
+	}
 
 	public void setStart(Date start) {
 		this.start = start;
@@ -41,10 +49,6 @@ public class UserBean {
 
 	public void setEnd(Date end) {
 		this.end = end;
-	}
-	
-	public String toLogin() {
-		return "/login.xhtml";
 	}
 
 	public void loginUser() {
@@ -73,12 +77,17 @@ public class UserBean {
 	    return "/index.xhtml";
 	}
 	
+	public Object renderLogin() {
+	    registerUser();
+	    return "/login.xhtml";
+	}
+	
 
 	public void info() {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "PrimeFaces Rocks."));
     }
 	
-	public void registerUser(ActionEvent event) {
+	public void registerUser() {
 		boolean registered = false;
 		RequestContext context = RequestContext.getCurrentInstance();
 		
@@ -101,11 +110,11 @@ public class UserBean {
 		Holidays tmp = new Holidays(start, end);
 		
 		System.out.println(tmp.getDays());
-		if(tmp.getDays() > userData.getRemainingHolidays()) {
+		if(tmp.getDays() <= userData.getRemainingHolidays() && start.before(end)) {
 			userData.addHoliday(tmp);
 			userData.deductRemainingHolidays(tmp.getDays());
-		} else if(tmp.getDays() < userData.getRemainingHolidays()) {
-			System.out.println("You don't have enough vacation days left.");
+		} else if(tmp.getDays() > userData.getRemainingHolidays() || start.after(end)) {
+			System.out.println("shit");
 		}
 	}
 
