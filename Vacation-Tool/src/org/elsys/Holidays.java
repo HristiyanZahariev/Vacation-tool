@@ -1,33 +1,33 @@
 package org.elsys;
 
+import java.util.Date;
+
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 public class Holidays {
-	private String holidayStart;
-	private String holidayEnd;
+	private Date holidayStart;
+	private Date holidayEnd;
 	
 	
-	public Holidays(String holidayStart, String holidayEnd) {
+	public Holidays(Date holidayStart, Date holidayEnd) {
 		this.holidayEnd = holidayEnd;
 		this.holidayStart = holidayStart;
 	}
 	
-	public String getHolidayStart() {
+	public Date getHolidayStart() {
 		return holidayStart;
 	}
 
-	public String getHolidayEnd() {
+	public Date getHolidayEnd() {
 		return holidayEnd;
 	}
 	
-	public int getDays() {
-		DateTimeFormatter dtf = DateTimeFormat.forPattern("dd/MM/yyyy");
-		
-		DateTime endDate = DateTime.parse(holidayEnd, dtf); 
-		DateTime startDate = DateTime.parse(holidayStart, dtf);
+	public int getDays() {	
+		DateTime startDate = new DateTime(holidayStart);
+		DateTime endDate = new DateTime(holidayEnd);
 		
 		return Days.daysBetween(startDate, endDate).getDays();
 	}
