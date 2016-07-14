@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
+	<ui:define name="content">
+		<body>
+			<h1>Today's date:</h1>
+			<p:calendar id="inline" value="#{calendarView.date1}" mode="inline" />
+			
+			<h1>You have #{userBean.remainingHolidays} days left for vacations.</h1>
+
+			<p:dialog header="Effects" widgetVar="dlg3" showEffect="explode" hideEffect="bounce" height="100">
+    			<h:outputText value="You have #{userBean.remainingHolidays} days of vacation left" />
+			</p:dialog>
+			<h:form id="form">
+    			<p:growl id="msgs" showDetail="true" />
+ 
+    			<h:panelGrid columns="2" cellpadding="5">
+
+			        <p:outputLabel for="id_start" value="Select start of your vacantion:" />
+			        <p:calendar id="id_start" value="#{userBean.start}" pattern="dd/MM/yyyy">
+			            <p:ajax event="dateSelect" update="msgs" />
+			        </p:calendar>
+		         </h:panelGrid>
+		         
+		         <h:panelGrid columns="2" cellpadding="5">
+			        <p:outputLabel for="id_end" value="Select start of your vacantion:"  />
+			        <p:calendar id="id_end" value="#{userBean.end}" pattern="dd/MM/yyyy">
+			            <p:ajax event="dateSelect" update="msgs" />
+			        </p:calendar>
+		         </h:panelGrid>
+		    <p:commandButton value="Submit" update="msgs" action="#{userBean.addHoliday}" icon="ui-icon-check" />
+		 
+		    <p:dialog modal="true" resizable="false" header="Values" widgetVar="dlg" showEffect="fold">
+		        <p:panelGrid id="display" columns="2" columnClasses="label,value">
+		            <h:outputText value="Event:" />
+		            <h:outputText value="#{calendarView.date4}">
+		                <f:convertDateTime pattern="dd/MM/yyyy" />
+		            </h:outputText>
+		 
+		        </p:panelGrid>
+		    </p:dialog>
+		</h:form>
+				
+		</body>
+	</ui:define>
+	</ui:composition>
+</html>
