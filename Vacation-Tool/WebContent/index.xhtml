@@ -13,10 +13,6 @@
 		<body>
 			<h1>Today's date:</h1>
 			<p:calendar id="inline" value="#{calendarView.date1}" mode="inline" />
-		
-			<h:panelGrid columns="1" cellpadding="5">
-    			<p:commandButton value="Holidays left" type="button" onclick="#{userData.getRemainingHolidays}" /> 
-			</h:panelGrid>
 			
 			<h1>You have #{userBean.remainingHolidays} days left for vacations.</h1>
 
