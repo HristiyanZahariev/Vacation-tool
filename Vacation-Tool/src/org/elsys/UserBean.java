@@ -42,13 +42,6 @@ public class UserBean {
 //	public void setEnd(DateTime end) {
 //		this.end = end;
 //	}
-    public String toLogin() {
-        return "/login.xhtml";
-    }
-    
-    public String toIndex() {
-    	return "/index.xhtml";
-    }
 	
 	public void loginUser() {
 		System.out.println("Submitted username: " + username);
