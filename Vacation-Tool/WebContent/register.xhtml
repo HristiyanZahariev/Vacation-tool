@@ -40,7 +40,8 @@
 		
 				<div class="form-group ">
 					<p:commandButton value="Register" update="matchGrid" actionListener="#{userBean.registerUser}"
-		                          oncomplete="handleLoginRequest(xhr, status, args)" />
+		                          oncomplete="handleLoginRequest(xhr, status, args)" 
+		                          action="#{userBean.toLogin}"/>
 				</div>
 			</h:form>
 				<div class="login-register">
