@@ -56,9 +56,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
         android:layout_marginBottom="162dp"
         android:onClick="logIn"
-        android:text="LogIn" />
+        android:text="LogIn"
+        android:layout_alignLeft="@+id/regbtn"
+        android:layout_alignStart="@+id/regbtn"
+        android:layout_alignRight="@+id/regbtn"
+        android:layout_alignEnd="@+id/regbtn" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="REGISTER"
+        android:id="@+id/regbtn"
+        android:layout_alignTop="@+id/bt_SignIn"
+        android:layout_marginTop="64dp"
+        android:layout_alignRight="@+id/password"
+        android:layout_alignEnd="@+id/password"
+        android:layout_alignLeft="@+id/password"
+        android:layout_alignStart="@+id/password" />
 
 </RelativeLayout>
