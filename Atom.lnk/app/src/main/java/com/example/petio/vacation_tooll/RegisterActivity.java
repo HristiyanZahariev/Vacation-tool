@@ -59,6 +59,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         // Set up the login form.
+        final String fielderror = "This field is required!";
         mUsernameView = (EditText) findViewById(R.id.username);
         mFullnameView = (EditText) findViewById(R.id.fullname);
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
@@ -69,7 +70,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String regcomplete = "Registration complete!";
-                boolean checked = true;
+                boolean checkreg = true;
                 /**
                  * Attempts to sign in or register the account specified by the login form.
                  */
@@ -85,38 +86,37 @@ public class RegisterActivity extends AppCompatActivity {
                 String email = mEmailView.getText().toString();
                 String password = mPasswordView.getText().toString();
 
-                boolean cancel = false;
-                View focusView = null;
-
                 //Check username
                 if (TextUtils.isEmpty(username)) {
-                    mUsernameView.setError("This field is required!");
-                    checked = false;
+                    mUsernameView.setError(fielderror);
+                    checkreg = false;
                 }
 
                 //Check full name
                 if (TextUtils.isEmpty(fullname)) {
-                    mFullnameView.setError("This field is required!");
-                    checked = false;
+                    mFullnameView.setError(fielderror);
+                    checkreg = false;
                 }
+
                 // Check for a valid password, if the user entered one.
                 if (TextUtils.isEmpty(password)) {
-                    mPasswordView.setError(getString(R.string.error_invalid_password));
-                    checked = false;
+                    mPasswordView.setError(fielderror);
+                    checkreg = false;
                 }
 
                 // Check for a valid email address.
                 if (TextUtils.isEmpty(email)) {
                     mEmailView.setError(getString(R.string.error_field_required));
-                    checked = false;
+                    checkreg = false;
                 } else if (!isEmailValid(email)) {
                     mEmailView.setError(getString(R.string.error_invalid_email));
-                    checked = false;
+                    checkreg = false;
                 }
-                Intent intent = new Intent(view.getContext(), LoginActivity.class);
-                if(checked == true) {
+
+                if(checkreg == true) {
                     Toast.makeText(RegisterActivity.this, regcomplete, Toast.LENGTH_SHORT).show();
-                    startActivityForResult(intent, 0);
+                    Intent intent = new Intent(view.getContext(), LoginActivity.class);
+                    startActivity(intent);
                 }
             }
         });
