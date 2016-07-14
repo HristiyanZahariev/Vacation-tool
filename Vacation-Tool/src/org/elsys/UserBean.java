@@ -24,25 +24,25 @@ public class UserBean {
 	private String name;
 	private String email;
 	private UserData userData = null;
-	private String start;
-	private String end;
+	private Date start;
+	private Date end;
 	
-//	public DateTime getStart() {
-//		return start;
-//	}
-//
-//	public void setStart(DateTime start) {
-//		this.start = start;
-//	}
-//
-//	public DateTime getEnd() {
-//		return end;
-//	}
-//
-//	public void setEnd(DateTime end) {
-//		this.end = end;
-//	}
-	
+	public Date getStart() {
+		return start;
+	}
+
+	public void setStart(Date start) {
+		this.start = start;
+	}
+
+	public Date getEnd() {
+		return end;
+	}
+
+	public void setEnd(Date end) {
+		this.end = end;
+	}
+
 	public void loginUser() {
 		System.out.println("Submitted username: " + username);
 		System.out.println("Submitted password: " + password);
@@ -54,7 +54,6 @@ public class UserBean {
 		userData = SessionSingleton.getInstance().getUserData(username);
 		if(userData == null) {
 			System.out.println("No user with that name. Please register.");	
-			
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error", "No user with that name is registered.");
 			FacesContext.getCurrentInstance().addMessage(null, message);
 		} else {
@@ -65,21 +64,6 @@ public class UserBean {
 		context.addCallbackParam("registered", loggedIn);
 	}
 	
-    public String getStart() {
-		return start;
-	}
-
-	public void setStart(String start) {
-		this.start = start;
-	}
-
-	public String getEnd() {
-		return end;
-	}
-
-	public void setEnd(String end) {
-		this.end = end;
-	}
 
 	public void info() {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "PrimeFaces Rocks."));
