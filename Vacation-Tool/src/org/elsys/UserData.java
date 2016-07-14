@@ -36,5 +36,7 @@ public class UserData {
 		managedHolidays.add(holiday);
 	}
 
-	
+	public void deductRemainingHolidays(Integer holidaysTaken) {
+		remainingHolidays -= holidaysTaken;
+	}
 }

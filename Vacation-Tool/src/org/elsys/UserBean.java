@@ -3,12 +3,16 @@ package org.elsys;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
+import org.joda.time.DateTime;
 import org.primefaces.context.RequestContext;
 
 @ManagedBean(name="userBean")
@@ -23,21 +27,21 @@ public class UserBean {
 	private String start;
 	private String end;
 	
-	public String getStart() {
-		return start;
-	}
-
-	public void setStart(String start) {
-		this.start = start;
-	}
-
-	public String getEnd() {
-		return end;
-	}
-
-	public void setEnd(String end) {
-		this.end = end;
-	}
+//	public DateTime getStart() {
+//		return start;
+//	}
+//
+//	public void setStart(DateTime start) {
+//		this.start = start;
+//	}
+//
+//	public DateTime getEnd() {
+//		return end;
+//	}
+//
+//	public void setEnd(DateTime end) {
+//		this.end = end;
+//	}
 
 	public void loginUser() {
 		System.out.println("Submitted username: " + username);
@@ -60,7 +64,23 @@ public class UserBean {
 		context.addCallbackParam("registered", loggedIn);
 	}
 	
-    public void info() {
+    public String getStart() {
+		return start;
+	}
+
+	public void setStart(String start) {
+		this.start = start;
+	}
+
+	public String getEnd() {
+		return end;
+	}
+
+	public void setEnd(String end) {
+		this.end = end;
+	}
+
+	public void info() {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "PrimeFaces Rocks."));
     }
 	
@@ -87,15 +107,20 @@ public class UserBean {
 		Holidays tmp = new Holidays(start, end);
 		
 		System.out.println(tmp.getDays());
-		userData.addHoliday(tmp);
+		if(tmp.getDays() > userData.getRemainingHolidays()) {
+			userData.addHoliday(tmp);
+			userData.deductRemainingHolidays(tmp.getDays());
+		} else if(tmp.getDays() < userData.getRemainingHolidays()) {
+			System.out.println("You don't have enough vacation days left.");
+		}
 	}
 
 	public List<Holidays> getManagedHolidays() {
 		return userData.getManagedHolidays();
 	}
 	
-	public int getRemainingHolidays() {
-		return userData.getRemainingHolidays();
+	public String getRemainingHolidays() {
+		return userData.getRemainingHolidays().toString();
 	}
 	
 	public String getUserDataUsername() {
