@@ -42,6 +42,10 @@ public class UserBean {
 	public void setEnd(Date end) {
 		this.end = end;
 	}
+	
+	public String toLogin() {
+		return "/login.xhtml";
+	}
 
 	public void loginUser() {
 		System.out.println("Submitted username: " + username);
@@ -62,6 +66,11 @@ public class UserBean {
 		}
 		
 		context.addCallbackParam("registered", loggedIn);
+	}
+	
+	public Object renderIndex() {
+	    loginUser();
+	    return "/index.xhtml";
 	}
 	
 
