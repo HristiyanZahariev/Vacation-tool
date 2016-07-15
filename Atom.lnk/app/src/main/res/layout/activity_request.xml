@@ -7,15 +7,61 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.petio.vacation_tooll.com.vaction_rool.RequestActivity"
-    android:background="#aaa">
+    tools:context=".LoginActivity"
+    android:background="@drawable/images">
 
-    <Button
+    <TextView
+        android:id="@+id/tv_Username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Submit"
-        android:id="@+id/submit"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/username"
+        android:layout_alignEnd="@+id/tv_Password"
+        android:layout_alignRight="@+id/tv_Password"
+        android:layout_marginBottom="27dp"
+        android:text="" />
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tv_Password"
+        android:layout_alignLeft="@+id/password"
+        android:layout_alignStart="@+id/password"
+        android:layout_marginBottom="38dp"
+        android:ems="10">
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/tv_Password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/password"
+        android:layout_alignLeft="@+id/bt_SignIn"
+        android:layout_alignStart="@+id/bt_SignIn"
+        android:text="Date end" />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bt_SignIn"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="157dp" />
+        android:layout_marginBottom="33dp"
+        android:ems="10" />
+
+    <Button
+        android:id="@+id/bt_SignIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="162dp"
+        android:onClick="send"
+        android:text="Send"
+        android:layout_alignLeft="@+id/password"
+        android:layout_alignStart="@+id/password"
+        android:layout_alignRight="@+id/password"
+        android:layout_alignEnd="@+id/password" />
+
 </RelativeLayout>

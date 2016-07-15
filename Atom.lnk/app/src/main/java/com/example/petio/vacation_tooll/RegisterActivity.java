@@ -31,8 +31,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import cz.msebera.android.httpclient.Header;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -112,11 +118,34 @@ public class RegisterActivity extends AppCompatActivity {
                     mEmailView.setError(getString(R.string.error_invalid_email));
                     checkreg = false;
                 }
+                if (checkreg == true) {
+                    AsyncHttpClient client = new AsyncHttpClient();
+                    AsyncHttpResponseHandler responseHandler = new AsyncHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(int i, Header[] headers, byte[] bytes) {
+                            String str = new String(bytes);
+                            if (str.split(",")[0].equals("reason")) {
+                                Toast.makeText(getApplicationContext(), str.split(",")[1].toString(), Toast.LENGTH_SHORT);
+                                return;
+                            }
+                            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                            startActivity(intent);
 
-                if(checkreg == true) {
-                    Toast.makeText(RegisterActivity.this, regcomplete, Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(view.getContext(), LoginActivity.class);
-                    startActivity(intent);
+                        }
+
+                        @Override
+                        public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
+
+
+                        }
+                    };
+                    String url = "http://192.168.1.103:8085/Vacantion-Tool/Register";//?username=" + username + "&password=" + password;
+                    RequestParams params = new RequestParams();
+                    params.add("username", username);
+                    params.add("email", email);
+                    params.add("password", password);
+                    client.get(url, params, responseHandler);
+
                 }
             }
         });
