@@ -9,11 +9,6 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
-	<ui:define name="header">
-		<p:button action="#{userBean.logout}" value="Logout" icon="ui-icon-star">
-    		<f:param name="productId" value="10" />
-		</p:button>
-	</ui:define>
 	<ui:define name="content">
 		<body>
 			<h1>Today's date:</h1>
@@ -22,7 +17,7 @@
 			<h1>You have #{userBean.remainingHolidays} days left for vacations.</h1>
 
 			<p:dialog header="Effects" widgetVar="dlg3" showEffect="explode" hideEffect="bounce" height="100">
-    			<h:outputText value="You have #{holidays.remainingHolidays} days of vacation left" />
+    			<h:outputText value="You have #{userBean.remainingHolidays} days of vacation left" />
 			</p:dialog>
 			<h:form id="form">
     			<p:growl id="msgs" showDetail="true" />
@@ -41,9 +36,7 @@
 			            <p:ajax event="dateSelect" update="msgs" />
 			        </p:calendar>
 		         </h:panelGrid>
-		    <p:commandButton value="Submit" update="msgs" onConfirmComplete="index.xhtml.reload" action="#{userBean.addHoliday}"  icon="ui-icon-check">
-		    	<f:ajax onevent="function(data){ if(data.status === 'success') window.refresh}"/>
-		    </p:commandButton>
+		    <p:commandButton value="Submit" update="msgs" action="#{userBean.addHoliday}" icon="ui-icon-check" />
 		 
 		    <p:dialog modal="true" resizable="false" header="Values" widgetVar="dlg" showEffect="fold">
 		        <p:panelGrid id="display" columns="2" columnClasses="label,value">
@@ -51,20 +44,10 @@
 		            <h:outputText value="#{calendarView.date4}">
 		                <f:convertDateTime pattern="dd/MM/yyyy" />
 		            </h:outputText>
+		 
 		        </p:panelGrid>
 		    </p:dialog>
 		</h:form>
-		
-		<ul>
-		    <ui:repeat value="#{userBean.managedHolidays}" var="holiday">
-		        <li>
-		            <h:link value="#{holiday.holidayStart}" outcome="book">
-		            </h:link> <span>- </span>
-		            <h:link value="#{holiday.holidayEnd}" outcome="book">
-		            </h:link>
-		        </li>
-		    </ui:repeat>
-		</ul>
 				
 		</body>
 	</ui:define>

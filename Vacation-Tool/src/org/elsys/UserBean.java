@@ -3,12 +3,14 @@ package org.elsys;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
@@ -24,32 +26,31 @@ public class UserBean {
 	private String name;
 	private String email;
 	private UserData userData = null;
-	private String start;
-	private String end;
+	private Date start;
+	private Date end;
 	
-//	public DateTime getStart() {
-//		return start;
-//	}
-//
-//	public void setStart(DateTime start) {
-//		this.start = start;
-//	}
-//
-//	public DateTime getEnd() {
-//		return end;
-//	}
-//
-//	public void setEnd(DateTime end) {
-//		this.end = end;
-//	}
-    public String toLogin() {
-        return "/login.xhtml";
-    }
-    
-    public String toIndex() {
-    	return "/index.xhtml";
-    }
+	public Date getStart() {
+		return start;
+	}
 	
+	public void logout() throws IOException {
+	    ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+	    ec.invalidateSession();
+	    ec.redirect(ec.getRequestContextPath() + "/login.xhtml");
+	}
+
+	public void setStart(Date start) {
+		this.start = start;
+	}
+
+	public Date getEnd() {
+		return end;
+	}
+
+	public void setEnd(Date end) {
+		this.end = end;
+	}
+
 	public void loginUser() {
 		System.out.println("Submitted username: " + username);
 		System.out.println("Submitted password: " + password);
@@ -61,7 +62,6 @@ public class UserBean {
 		userData = SessionSingleton.getInstance().getUserData(username);
 		if(userData == null) {
 			System.out.println("No user with that name. Please register.");	
-			
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error", "No user with that name is registered.");
 			FacesContext.getCurrentInstance().addMessage(null, message);
 		} else {
@@ -72,27 +72,22 @@ public class UserBean {
 		context.addCallbackParam("registered", loggedIn);
 	}
 	
-    public String getStart() {
-		return start;
+	public Object renderIndex() {
+	    loginUser();
+	    return "/index.xhtml";
 	}
-
-	public void setStart(String start) {
-		this.start = start;
+	
+	public Object renderLogin() {
+	    registerUser();
+	    return "/login.xhtml";
 	}
-
-	public String getEnd() {
-		return end;
-	}
-
-	public void setEnd(String end) {
-		this.end = end;
-	}
+	
 
 	public void info() {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "PrimeFaces Rocks."));
     }
 	
-	public void registerUser(ActionEvent event) {
+	public void registerUser() {
 		boolean registered = false;
 		RequestContext context = RequestContext.getCurrentInstance();
 		
@@ -115,11 +110,11 @@ public class UserBean {
 		Holidays tmp = new Holidays(start, end);
 		
 		System.out.println(tmp.getDays());
-		if(tmp.getDays() > userData.getRemainingHolidays()) {
+		if(tmp.getDays() <= userData.getRemainingHolidays() && start.before(end)) {
 			userData.addHoliday(tmp);
 			userData.deductRemainingHolidays(tmp.getDays());
-		} else if(tmp.getDays() < userData.getRemainingHolidays()) {
-			System.out.println("You don't have enough vacation days left.");
+		} else if(tmp.getDays() > userData.getRemainingHolidays() || start.after(end)) {
+			System.out.println("shit");
 		}
 	}
 
